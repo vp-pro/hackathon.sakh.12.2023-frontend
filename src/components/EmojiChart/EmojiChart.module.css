@@ -1,0 +1,15 @@
+.sentimentElement{
+    display: flex;
+    width: 500px;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+}
+
+.text {
+    width: 350px;
+
+}
+.iconContainer{
+    margin-right: 10px;
+}

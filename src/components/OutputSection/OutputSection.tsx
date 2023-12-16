@@ -1,35 +1,60 @@
-
+import React from 'react';
 import { PiSmiley, PiSmileySad, PiSmileyBlank, PiQuestion } from 'react-icons/pi';
 import { MdOutlineWavingHand } from 'react-icons/md';
 import { IconContext } from 'react-icons';
+import ProgressBar from "@ramonak/react-progress-bar";
+import { ISentimentArray } from '../../utils/types';
+import styles from './OutputSection.module.css';
+import { LinearProgress, CircularProgress, linearProgressClasses  } from '@mui/material';
 
-interface BlueLargeIconProps {
-  icon: React.ReactElement;
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import { EmojiChart } from '../EmojiChart/EmojiChart';
+
+
+
+interface IOutputSection {
+  sentimentArray: ISentimentArray;
 }
 
-function IconWrapper({ icon }: BlueLargeIconProps) {
-  return (
-    <IconContext.Provider
-      value={{ color: 'blue', size: '20px' }}
-    > 
-      <div>
-        {icon}
-      </div>
-    </IconContext.Provider>
-  );
-}
+const OutputSection: React.FC<IOutputSection> = ({ sentimentArray }) => {
+  if (sentimentArray.sentiment === null) {
+    return <div>No data available</div>;
+  } else {
+    const { positive, neutral, negative, speech, skip } = sentimentArray.sentiment;
 
-const OutputSection: React.FC = () => {
+    const positiveColor = `rgba(0, 200, 0, ${positive+0.3})`;
+    const neutralColor = `rgba(90, 90, 90, ${neutral+0.3})`;
+    const negativeColor = `rgba(180, 0, 0, ${negative+0.3})`;
+    const speechColor = `rgba(0, 0, 140, ${speech+0.3})`;
+    const skipColor = `rgba(80, 80, 80, ${skip+0.3})`;
 
-  return (
-    <div>
-        <IconWrapper icon={<PiSmiley />} />
-        <IconWrapper icon={<PiSmileyBlank />} />
-        <IconWrapper icon={<PiSmileySad />} />
-        <IconWrapper icon={<MdOutlineWavingHand />} />
-        <IconWrapper icon={<PiQuestion />} />   
-    </div>
-  );
+    return (
+      <section className={styles.container}>
+        <div className={styles.functionalSection}> 
+          <h1>Функциональный анализ тональности</h1>
+          <div className={styles.functionalList}>
+            <EmojiChart icon={<PiSmiley />} num={positive} color={positiveColor} text='Позитивное сообщение'/>
+            <EmojiChart icon={<PiSmileyBlank />} num={neutral} color={neutralColor} text='Нейтральное сообщение'/>
+            <EmojiChart icon={<PiSmileySad/>} num={negative} color={negativeColor} text='Негативное сообщение'/>
+            <EmojiChart icon={< MdOutlineWavingHand/>} num={speech} color={speechColor} text='Управление коммуникацией'/>
+            <EmojiChart icon={< PiQuestion/>} num={skip} color={skipColor} text='Неизвестное сообщение'/>
+          </div>
+        </div>
+
+        <div className={styles.functionalSection}> 
+          <h1>Эмоциональный анализ тональности</h1>
+          <div className={styles.functionalList}>
+            <EmojiChart icon={<PiSmiley />} num={positive} color={positiveColor} text='Позитивное сообщение'/>
+            <EmojiChart icon={<PiSmileyBlank />} num={neutral} color={neutralColor} text='Нейтральное сообщение'/>
+            <EmojiChart icon={<PiSmileySad/>} num={negative} color={negativeColor} text='Негативное сообщение'/>
+            <EmojiChart icon={< MdOutlineWavingHand/>} num={speech} color={speechColor} text='Управление коммуникацией'/>
+            <EmojiChart icon={< PiQuestion/>} num={skip} color={skipColor} text='Неизвестное сообщение'/>
+          </div>
+        </div>
+      </section>
+    );
+  }
 };
 
 export default OutputSection;

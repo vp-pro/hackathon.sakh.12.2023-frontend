@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import styles from './InputSection.module.css'
+import {urls} from '../../utils/api'
+import { ISentimentArray } from '../../utils/types';
 
 interface IInputSection {
     message: string;
   setMessage: (message: string) => void;
-  setResults: (result: Array<{probability: number;}>) => void;
+  setResults: React.Dispatch<React.SetStateAction<ISentimentArray>>;
 }
 
 const InputSection: React.FC<IInputSection> = ({ message, setMessage, setResults }) => {
@@ -13,7 +15,7 @@ const InputSection: React.FC<IInputSection> = ({ message, setMessage, setResults
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch('https://api.panferov.site/v1/sentiment', {
+      const response = await fetch(urls.base, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -22,8 +24,8 @@ const InputSection: React.FC<IInputSection> = ({ message, setMessage, setResults
       });
 
       const data = await response.json();
-      console.log(data)
-      setResults(data);
+      console.log(data[0])
+      setResults(data[0]);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -44,6 +46,7 @@ const InputSection: React.FC<IInputSection> = ({ message, setMessage, setResults
   
   return (
     <form onSubmit={handleFormSubmit}>
+      <h1 className={styles.Title}></h1>
             <input type="text" value={inputText} onChange={handleMessageUpdate} />
 
         <div className={styles.buttonSection}>

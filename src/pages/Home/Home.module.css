@@ -1,7 +1,14 @@
+
 .container{
+    flex: 1;
     display: flex;
-    max-width: 960px;
+    width: 960px;
     justify-content: space-between;
     align-items: center;
     margin: auto;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    border-radius: 30px;
+    /* background-color: var(--main-bg-color); */
+    /* flex-grow: 1; */
 }

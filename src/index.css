@@ -1,8 +1,12 @@
 :root {
-  --main-bg-color: #001f3f; /* Deep Blue Background Color */
+  --main-bg-color: #02083d; /* Deep Blue Background Color */
   --text-color: #ffffff; /* White Text Color */
   --link-color: #ffffff; /* White Link Color */
   --link-hover-color: #ffcc00; /* Yellow Link Hover Color */
+  --header-bg-color: #02083d;
+  --main-bg-bg-color: #010314;
+  /* --main-bg-color: #001f3f;  */
+
 }
 
 body {
@@ -12,6 +16,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
+  /* background-color: var(--main-bg-bg-color) */
 }
 
 code {
