@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import InputSection from '../components/InputSection/InputSection';
-import ResultDiv from '../components/ResultDiv/ResultDiv';
-import EmojiChartDiv from '../components/EmojiChart/EmojiChart';
+import InputSection from '../../components/InputSection/InputSection';
+import EmojiChartDiv from '../../components/EmojiChart/EmojiChart';
+import styles from './Home.module.css'
 
 const HomePage: React.FC = () => {
   const [message, setMessage] = useState('');
@@ -31,20 +31,10 @@ const HomePage: React.FC = () => {
 
 
   return (
-    <div>
-      <form onSubmit={handleFormSubmit}>
-        <InputSection value={message} setMessage={setMessage} />
-        <button type="submit">Submit</button>
-      </form>
+    <div className={styles.container}>
+      <InputSection message={message} setMessage={setMessage} setResults={setResults}/>
 
-      {/* <div style={{ display: 'flex' }}>
-        {results.map((result, index) => (
-          <div key={index} style={{ margin: '10px' }}>
-            <ResultDiv emoji={result.emoji} probability={result.probability} />
-            <EmojiChartDiv emoji={result.emoji} chartData={[50, 30, 80, 20, 60]} />
-          </div>
-        ))}
-      </div> */}
+    
     </div>
   );
 };

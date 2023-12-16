@@ -1,8 +1,9 @@
 import React from 'react';
 import {Route, Routes } from 'react-router-dom';
-import HomePage from './pages/Home';
-import AboutPage from './pages/About';
+import HomePage from './pages/Home/Home';
+import AboutPage from './pages/About/About';
 import Header from './components/Header/Header';
+import CSVPage from './pages/CSV/CSV';
 
 const App: React.FC = () => {
   return (
