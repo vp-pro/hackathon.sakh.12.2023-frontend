@@ -23,11 +23,11 @@ const Header: React.FC = () => {
                     Домашняя страница
                     </Link>
                 </li>
-                <li>
+                {/* <li>
                     <Link to="/about" className={styles.link}>
                     О проекте
                     </Link>
-                </li>
+                </li> */}
                 </ul>
             </nav>
         </div>
