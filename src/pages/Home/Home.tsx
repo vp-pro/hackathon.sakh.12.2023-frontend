@@ -13,14 +13,38 @@ const HomePage: React.FC = () => {
     speech: 0,
     skip: 0,
   } });
+  const [emotionalSentiment, setEmotionalSentiment] = useState<string>('');
+  const [languageDetected, setLanguageDetected] = useState<string>('');
 
+  const [functionalSentimentLoading, setFunctionalSentimentLoading] = useState<boolean>(false);
+  const [emotionalSentimentLoading, setEmotionalSentimentLoading] = useState<boolean>(false);
+  const [languageDetectedLoading, setLanguageDetectedLoading] = useState<boolean>(false);
 
   return (
-    <div className={styles.container}>
-      <InputSection message={message} setMessage={setMessage} setFunctionalSentiment={setFunctionalSentiment}/>
-      <OutputSection functionalSentiment={functionalSentiment}/>
+  
+      <div className={styles.mainContainer}>
+          <h1 className={styles.mainTitle}>Анализ тональности русскоязычного текста</h1>
+            <div className={styles.container}>
+              <InputSection 
+              message={message} setMessage={setMessage} 
+              setFunctionalSentiment={setFunctionalSentiment} 
+              setEmotionalSentiment={setEmotionalSentiment} 
+              setLanguageDetected={setLanguageDetected}
+              setFunctionalSentimentLoading={setFunctionalSentimentLoading}
+              setEmotionalSentimentLoading={setEmotionalSentimentLoading}
+              setLanguageDetectedLoading={setLanguageDetectedLoading}
+              />
+              <OutputSection 
+              functionalSentiment={functionalSentiment} 
+              emotionalSentiment={emotionalSentiment} 
+              languageDetected={languageDetected}
+              functionalSentimentLoading={functionalSentimentLoading}
+              emotionalSentimentLoading={emotionalSentimentLoading}
+              languageDetectedLoading={languageDetectedLoading}
+              />
+            </div>
+      </div>
 
-    </div>
   );
 };
 

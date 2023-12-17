@@ -1,60 +1,78 @@
 import React from 'react';
 import { PiSmiley, PiSmileySad, PiSmileyBlank, PiQuestion } from 'react-icons/pi';
 import { MdOutlineWavingHand } from 'react-icons/md';
-import { IconContext } from 'react-icons';
-import ProgressBar from "@ramonak/react-progress-bar";
-import { ISentimentArray } from '../../utils/types';
+import { CircularProgress } from '@mui/material';
 import styles from './OutputSection.module.css';
-import { LinearProgress, CircularProgress, linearProgressClasses  } from '@mui/material';
-
-import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 import { EmojiChart } from '../EmojiChart/EmojiChart';
-
-
+import { ISentimentArray } from '../../utils/types';
 
 interface IOutputSection {
   functionalSentiment: ISentimentArray;
+  emotionalSentiment: string;
+  languageDetected: string;
+  functionalSentimentLoading: boolean;
+  emotionalSentimentLoading: boolean;
+  languageDetectedLoading: boolean;
 }
 
-const OutputSection: React.FC<IOutputSection> = ({ functionalSentiment }) => {
-  if (functionalSentiment.functionalSentiment === null) {
-    return <div>No data available</div>;
-  } else {
-    const { positive, neutral, negative, speech, skip } = functionalSentiment.functionalSentiment;
-
-    const positiveColor = `rgba(0, 200, 0, ${positive+0.3})`;
-    const neutralColor = `rgba(90, 90, 90, ${neutral+0.3})`;
-    const negativeColor = `rgba(180, 0, 0, ${negative+0.3})`;
-    const speechColor = `rgba(0, 0, 140, ${speech+0.3})`;
-    const skipColor = `rgba(80, 80, 80, ${skip+0.3})`;
-
-    return (
-      <section className={styles.container}>
-        <div className={styles.functionalSection}> 
-          <h1>Функциональный анализ тональности</h1>
-          <div className={styles.functionalList}>
-            <EmojiChart icon={<PiSmiley />} num={positive} color={positiveColor} text='Позитивное сообщение'/>
-            <EmojiChart icon={<PiSmileyBlank />} num={neutral} color={neutralColor} text='Нейтральное сообщение'/>
-            <EmojiChart icon={<PiSmileySad/>} num={negative} color={negativeColor} text='Негативное сообщение'/>
-            <EmojiChart icon={< MdOutlineWavingHand/>} num={speech} color={speechColor} text='Управление коммуникацией'/>
-            <EmojiChart icon={< PiQuestion/>} num={skip} color={skipColor} text='Тональность сообщения не определена'/>
+const OutputSection: React.FC<IOutputSection> = ({
+  functionalSentiment,
+  emotionalSentiment,
+  languageDetected,
+  functionalSentimentLoading,
+  emotionalSentimentLoading,
+  languageDetectedLoading,
+}) => {
+  return (
+    <section className={styles.container}>
+      <div className={styles.functionalSection}>
+        <h1 className={styles.title}>Функциональный анализ тональности</h1>
+        {functionalSentimentLoading && <div className={styles.loadingOverlay}></div>}
+        {functionalSentimentLoading && (
+          <div className={styles.loadingIndicator}>
+            <CircularProgress />
           </div>
+        )}
+        <div className={styles.functionalList}>
+          {functionalSentiment?.functionalSentiment && (
+            <>
+              <EmojiChart icon={<PiSmiley />} num={functionalSentiment.functionalSentiment.positive} color={`rgba(0, 200, 0, ${functionalSentiment.functionalSentiment.positive + 0.3})`} text='Позитивное сообщение' />
+              <EmojiChart icon={<PiSmileyBlank />} num={functionalSentiment.functionalSentiment.neutral} color={`rgba(90, 90, 90, ${functionalSentiment.functionalSentiment.neutral + 0.3})`} text='Нейтральное сообщение' />
+              <EmojiChart icon={<PiSmileySad />} num={functionalSentiment.functionalSentiment.negative} color={`rgba(180, 0, 0, ${functionalSentiment.functionalSentiment.negative + 0.3})`} text='Негативное сообщение' />
+              <EmojiChart icon={<MdOutlineWavingHand />} num={functionalSentiment.functionalSentiment.speech} color={`rgba(0, 0, 140, ${functionalSentiment.functionalSentiment.speech + 0.3})`} text='Управление коммуникацией' />
+              <EmojiChart icon={<PiQuestion />} num={functionalSentiment.functionalSentiment.skip} color={`rgba(80, 80, 80, ${functionalSentiment.functionalSentiment.skip + 0.3})`} text='Тональность сообщения не определена' />
+            </>
+          )}
         </div>
+      </div>
 
-        <div className={styles.functionalSection}> 
-          <h1>Эмоциональный анализ тональности</h1>
-          <div className={styles.functionalList}>
-            <EmojiChart icon={<PiSmiley />} num={positive} color={positiveColor} text='Позитивное сообщение'/>
-            <EmojiChart icon={<PiSmileyBlank />} num={neutral} color={neutralColor} text='Нейтральное сообщение'/>
-            <EmojiChart icon={<PiSmileySad/>} num={negative} color={negativeColor} text='Негативное сообщение'/>
-            <EmojiChart icon={< MdOutlineWavingHand/>} num={speech} color={speechColor} text='Управление коммуникацией'/>
-            <EmojiChart icon={< PiQuestion/>} num={skip} color={skipColor} text='Тональность сообщения не определена'/>
+      <div className={styles.emotionalSection}>
+      <h1>Эмоциональный анализ тональности</h1>
+        {emotionalSentimentLoading && <div className={styles.loadingOverlay}></div>}
+        {emotionalSentimentLoading && (
+          <div className={styles.loadingIndicator}>
+            <CircularProgress />
           </div>
-        </div>
-      </section>
-    );
-  }
+        )}
+        <div className={styles.functionalList}>
+          {emotionalSentiment ? emotionalSentiment: '\u00A0'}
+          </div>
+      </div>
+
+      <div className={styles.languageSection}>
+        <h1>Язык сообщения</h1>
+        {languageDetectedLoading && <div className={styles.loadingOverlay}></div>}
+        {languageDetectedLoading && (
+          <div className={styles.loadingIndicator}>
+            <CircularProgress />
+          </div>
+        )}
+        <div className={styles.functionalList}>
+          {languageDetected ? languageDetected: '\u00A0'}
+          </div>
+      </div>
+    </section>
+  );
 };
 
 export default OutputSection;

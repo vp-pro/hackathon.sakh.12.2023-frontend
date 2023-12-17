@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import {Route, Routes } from 'react-router-dom';
 import HomePage from './pages/Home/Home';
 import AboutPage from './pages/About/About';
@@ -9,15 +9,18 @@ import styles from './App.module.css'
 
 const App: React.FC = () => {
   return (
-    <div className={styles.mainContainer}>
-      <Header/>    
-      <Routes>
-          <Route path="/" Component={HomePage} />
-          <Route path="/about" Component={AboutPage} />
-          <Route path="/csv" Component={CSVPage} />
-      </Routes>
-      <Footer/>
-    </div>
+    <Suspense fallback={<div>Loading...</div>}>
+      <div className={styles.mainContainer}>
+        <Header/>    
+        <Routes>
+            <Route path="/" Component={HomePage} />
+            <Route path="/about" Component={AboutPage} />
+            <Route path="/csv" Component={CSVPage} />
+        </Routes>
+        <Footer/>
+        
+      </div>
+    </Suspense>
 
 
   );

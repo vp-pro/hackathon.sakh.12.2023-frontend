@@ -6,7 +6,10 @@
   --header-bg-color: #02083d;
   --main-bg-bg-color: #010314;
   /* --main-bg-color: #001f3f;  */
+  --main-light-bg-color: #2d3dc7;
 
+
+  --main-bg-color: #151f7a;
 }
 
 body {

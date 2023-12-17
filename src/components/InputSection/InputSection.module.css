@@ -2,3 +2,58 @@
     display: flex;
     justify-content: space-between;
 }
+
+.form {
+    width: 100%;
+    padding-right: 30px;
+    max-width: 450px;
+}
+.inputText {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: -webkit-fill-available;
+
+  }
+  
+  .title{
+    font-size: 24px;
+}
+
+  .buttonSection {
+    margin-top: 10px;
+    width: 100%;
+    margin-right: 0;
+    padding-right: 0;
+  }
+  
+  .button {
+    padding: 7px 15px;
+    font-size: 16px;
+    background-color: var(--main-light-bg-color);
+    /* background-color: var(--main-bg-color); */
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+
+  }
+  
+  .buttonClear {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: var(--main-light-bg-color);
+    /* background-color: var(--main-bg-color); */
+
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+
+  .button:hover,
+  .buttonClear:hover {
+    background-color:   var(--main-bg-color);
+  }
