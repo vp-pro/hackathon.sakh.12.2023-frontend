@@ -47,18 +47,20 @@
   color: var(--link-hover-color);
 }
 
-/* @media only screen and (max-width: 900px) {
+/* Mobile Styles */
+@media only screen and (max-width: 760px) {
   .container {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: column; /* Change flex direction to column for small screens */
+    align-items: flex-start; /* Adjust alignment for column layout */
+    padding: 15px;
   }
 
   .navLinks {
-    margin-top: 10px;
+    margin-top: 10px; /* Add margin between logo and navLinks */
   }
 
   .navLinks li {
-    margin: 0;
-    margin-bottom: 0.5rem;
+    margin-right: 0; /* Remove margin between navLinks items */
+    margin-bottom: 10px; /* Add margin between navLinks items */
   }
-} */
+}

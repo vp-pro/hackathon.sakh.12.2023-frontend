@@ -28,15 +28,16 @@
   text-decoration: underline;
 }
 
-/* Mobile Styles */
 @media only screen and (max-width: 900px) {
   .footer {
-    max-width: -webkit-fill-available;
+    max-width: 100%;
     padding: 15px;
+    box-sizing: border-box; /* Add this line to include padding in the width */
   }
 
   .container {
     max-width: 100%;
     padding: 0 15px;
+    box-sizing: border-box; /* Add this line to include padding in the width */
   }
 }
