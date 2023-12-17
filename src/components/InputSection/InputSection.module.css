@@ -58,7 +58,7 @@
     background-color:   var(--main-bg-color);
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 990px) {
     .form {
       max-width: -webkit-fill-available; /* Set max-width to 100% for smaller screens */
       padding: 0 15px; /* Optional: Add padding for better visual appearance */

@@ -25,7 +25,7 @@
     margin-bottom: 30px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 990px) {
     /* Apply styles only on screens up to 768px wide (typical for mobile devices) */
     .container {
       flex-direction: column; /* Stack sections in one column on mobile */
@@ -33,6 +33,5 @@
 
     .mainContainer {
       width: auto; /* Full width on mobile */
-      padding: 20px;
     }
   }

@@ -3,6 +3,8 @@
   color: var(--text-color);
   padding: 20px;
   text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
 .container {
@@ -27,8 +29,9 @@
 }
 
 /* Mobile Styles */
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 900px) {
   .footer {
+    max-width: -webkit-fill-available;
     padding: 15px;
   }
 
