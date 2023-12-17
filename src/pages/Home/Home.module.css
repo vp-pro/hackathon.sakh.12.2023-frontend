@@ -4,7 +4,7 @@
     display: flex;
     justify-content: space-between;
     align-items: start;
-   
+
     border-radius: 30px;
     /* background-color: var(--main-bg-color); */
     /* flex-grow: 1; */
@@ -24,3 +24,15 @@
     text-align: center;
     margin-bottom: 30px;
 }
+
+@media (max-width: 768px) {
+    /* Apply styles only on screens up to 768px wide (typical for mobile devices) */
+    .container {
+      flex-direction: column; /* Stack sections in one column on mobile */
+    }
+
+    .mainContainer {
+      width: auto; /* Full width on mobile */
+      padding: 20px;
+    }
+  }

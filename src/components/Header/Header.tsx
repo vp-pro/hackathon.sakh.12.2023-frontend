@@ -13,25 +13,25 @@ const Header: React.FC = () => {
             </div>
             <nav>
                 <ul className={styles.navLinks}>
-                <li>
+                {/* <li>
                     <Link to="/csv" className={styles.link}>
                     CSV
                     </Link>
-                </li>
+                </li> */}
                 <li>
                     <Link to="/" className={styles.link}>
-                    Home
+                    Домашняя страница
                     </Link>
                 </li>
                 <li>
                     <Link to="/about" className={styles.link}>
-                    About
+                    О проекте
                     </Link>
                 </li>
                 </ul>
             </nav>
         </div>
-     
+
     </header>
   );
 };

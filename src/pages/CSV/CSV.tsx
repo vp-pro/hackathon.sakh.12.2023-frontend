@@ -1,30 +1,44 @@
-import React, { useState } from 'react';
-import Papa from 'papaparse';
+import React, { useState, ChangeEvent } from 'react';
+import Papa, { ParseResult } from 'papaparse';
 
-const CSVPage = () => {
-  const [csvFile, setCsvFile] = useState(null);
-  const [resultFile, setResultFile] = useState(null);
+interface ResultFile {
+  message: string;
+  functional_sentiment: {
+    positive: number;
+    neutral: number;
+    negative: number;
+    speech: number;
+    skip: number;
+  };
+  emotional_sentiment: string;
+  detected_language: string;
+}
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setCsvFile(file);
+const CSVPage: React.FC = () => {
+  const [csvFile, setCsvFile] = useState<File | null>(null);
+  const [resultFile, setResultFile] = useState<ResultFile[] | null>(null);
+
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    setCsvFile(file || null);
   };
 
   const handleUpload = async () => {
     if (!csvFile) return;
 
     Papa.parse(csvFile, {
-      complete: (result) => {
-        const jsonData = result.data;
+      complete: (result: ParseResult<any>) => {
+        const jsonData = result.data.map((row: string[]) => row[0]); // Assuming the text is in the first column
         sendJsonToServer(jsonData);
       },
-      header: true, // Assuming CSV has a header row
+      delimiter: ';', // Set the delimiter to semicolon
+      header: false, // No header row
     });
   };
 
-  const sendJsonToServer = async (jsonData) => {
+  const sendJsonToServer = async (jsonData: any) => {
     try {
-      const response = await fetch('http://localhost:3001/v1/sentiment', {
+      const response = await fetch('http://api.mechty.fun/v1/sentiment', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -33,7 +47,7 @@ const CSVPage = () => {
       });
 
       if (response.ok) {
-        const result = await response.json();
+        const result: ResultFile[] = await response.json();
         setResultFile(result);
       } else {
         console.error('Error sending JSON data to server');
@@ -48,7 +62,7 @@ const CSVPage = () => {
       <h1>CSV Uploader</h1>
       <input type="file" accept=".csv" onChange={handleFileChange} />
       <button onClick={handleUpload}>Upload CSV</button>
-      
+
       {resultFile && (
         <div>
           <h2>Result</h2>

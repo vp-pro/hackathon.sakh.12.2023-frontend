@@ -1,16 +1,26 @@
-.footer {    
-    display: flex;
-    justify-content: center;
-    background-color: var(--main-bg-color);
-    color: var(--text-color);
-    height: 80px;
+.footer {
+  background-color: var(--main-bg-color);
+  color: var(--text-color);
+  padding: 20px;
+  text-align: center;
+}
 
-  }
-  
-  .container { 
-    max-width: 760px;
-    width: 100%; /* Add this line to make the container take full width */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.text {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.link {
+  color: var(--link-hover-color);
+  text-decoration: none;
+}
+
+.link:hover {
+  color: var(--link-hover-color);
+  text-decoration: underline;
+}
