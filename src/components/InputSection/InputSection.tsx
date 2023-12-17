@@ -6,30 +6,62 @@ import { ISentimentArray } from '../../utils/types';
 interface IInputSection {
     message: string;
   setMessage: (message: string) => void;
-  setResults: React.Dispatch<React.SetStateAction<ISentimentArray>>;
+  setFunctionalSentiment: React.Dispatch<React.SetStateAction<ISentimentArray>>;
 }
 
-const InputSection: React.FC<IInputSection> = ({ message, setMessage, setResults }) => {
+const InputSection: React.FC<IInputSection> = ({ message, setMessage, setFunctionalSentiment }) => {
   const [inputText, setInputText] = useState(message);
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch(urls.base, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ message: [message] }),
-      });
+      const [emotionalResponse, functionalResponse, languageResponse] = await Promise.all([
+        fetch(urls.emotionalSentiment, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ messages: [message] }),
+        }),
+        fetch(urls.functionalSentiment, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ messages: [message] }),
+        }),
+        fetch(urls.languageDetection, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ messages: [message] }),
+        }),
+      ]);
+  
+      const [emotionalData, functionalData, languageData] = await Promise.all([
+        emotionalResponse.json(),
+        functionalResponse.json(),
+        languageResponse.json(),
+      ]);
 
-      const data = await response.json();
-      console.log(data[0])
-      setResults(data[0]);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
+      console.log('Emotional Data:', emotionalData[0]);
+      console.log('Functional Data:', functionalData[0]);
+      console.log('Language Data:', languageData[0]);
+
+
+      setFunctionalSentiment({message: functionalData[0].message, 
+        functionalSentiment: functionalData[0].functional_sentiment});
+
+  
+
+
+    
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
+
 
   const handleClearClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();

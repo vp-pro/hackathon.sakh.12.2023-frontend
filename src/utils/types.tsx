@@ -1,6 +1,6 @@
 export interface ISentimentArray {
   message: string;
-  sentiment: {
+  functionalSentiment: {
     positive: number;
     neutral: number;
     negative: number;

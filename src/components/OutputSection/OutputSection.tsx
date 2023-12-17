@@ -14,14 +14,14 @@ import { EmojiChart } from '../EmojiChart/EmojiChart';
 
 
 interface IOutputSection {
-  sentimentArray: ISentimentArray;
+  functionalSentiment: ISentimentArray;
 }
 
-const OutputSection: React.FC<IOutputSection> = ({ sentimentArray }) => {
-  if (sentimentArray.sentiment === null) {
+const OutputSection: React.FC<IOutputSection> = ({ functionalSentiment }) => {
+  if (functionalSentiment.functionalSentiment === null) {
     return <div>No data available</div>;
   } else {
-    const { positive, neutral, negative, speech, skip } = sentimentArray.sentiment;
+    const { positive, neutral, negative, speech, skip } = functionalSentiment.functionalSentiment;
 
     const positiveColor = `rgba(0, 200, 0, ${positive+0.3})`;
     const neutralColor = `rgba(90, 90, 90, ${neutral+0.3})`;
@@ -38,7 +38,7 @@ const OutputSection: React.FC<IOutputSection> = ({ sentimentArray }) => {
             <EmojiChart icon={<PiSmileyBlank />} num={neutral} color={neutralColor} text='Нейтральное сообщение'/>
             <EmojiChart icon={<PiSmileySad/>} num={negative} color={negativeColor} text='Негативное сообщение'/>
             <EmojiChart icon={< MdOutlineWavingHand/>} num={speech} color={speechColor} text='Управление коммуникацией'/>
-            <EmojiChart icon={< PiQuestion/>} num={skip} color={skipColor} text='Неизвестное сообщение'/>
+            <EmojiChart icon={< PiQuestion/>} num={skip} color={skipColor} text='Тональность сообщения не определена'/>
           </div>
         </div>
 
@@ -49,7 +49,7 @@ const OutputSection: React.FC<IOutputSection> = ({ sentimentArray }) => {
             <EmojiChart icon={<PiSmileyBlank />} num={neutral} color={neutralColor} text='Нейтральное сообщение'/>
             <EmojiChart icon={<PiSmileySad/>} num={negative} color={negativeColor} text='Негативное сообщение'/>
             <EmojiChart icon={< MdOutlineWavingHand/>} num={speech} color={speechColor} text='Управление коммуникацией'/>
-            <EmojiChart icon={< PiQuestion/>} num={skip} color={skipColor} text='Неизвестное сообщение'/>
+            <EmojiChart icon={< PiQuestion/>} num={skip} color={skipColor} text='Тональность сообщения не определена'/>
           </div>
         </div>
       </section>

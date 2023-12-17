@@ -6,7 +6,7 @@ import { ISentimentArray } from '../../utils/types';
 
 const HomePage: React.FC = () => {
   const [message, setMessage] = useState('');
-  const [results, setResults] = useState<ISentimentArray>({ message: '', sentiment: {
+  const [functionalSentiment, setFunctionalSentiment] = useState<ISentimentArray>({ message: '', functionalSentiment: {
     positive: 0,
     neutral: 0,
     negative: 0,
@@ -17,8 +17,8 @@ const HomePage: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <InputSection message={message} setMessage={setMessage} setResults={setResults}/>
-      <OutputSection sentimentArray={results}/>
+      <InputSection message={message} setMessage={setMessage} setFunctionalSentiment={setFunctionalSentiment}/>
+      <OutputSection functionalSentiment={functionalSentiment}/>
 
     </div>
   );
