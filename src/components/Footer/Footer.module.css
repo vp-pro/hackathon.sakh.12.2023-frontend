@@ -18,9 +18,22 @@
 .link {
   color: var(--link-hover-color);
   text-decoration: none;
+  transition: color 0.3s ease-in-out;
 }
 
 .link:hover {
   color: var(--link-hover-color);
   text-decoration: underline;
+}
+
+/* Mobile Styles */
+@media only screen and (max-width: 600px) {
+  .footer {
+    padding: 15px;
+  }
+
+  .container {
+    max-width: 100%;
+    padding: 0 15px;
+  }
 }
