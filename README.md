@@ -39,7 +39,3 @@
    # В папке backend
    npm start
    ```
-
-## Связь с разработчиками
-
-- [Автор проекта](mailto:panfyor26@gmail.com)
